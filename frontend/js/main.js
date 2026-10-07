@@ -13,7 +13,26 @@ let deleteId = null;
 const $ = (id) => document.getElementById(id);
 const editModal = new bootstrap.Modal($('editModal'));
 const deleteModal = new bootstrap.Modal($('deleteModal'));
-
+ 
+/* ---------- Data layer ---------- */
+ 
+// [COMP-07] Simulated async fetch so the loading spinner is visible
+function fetchRecords() {
+ return new Promise((resolve) => {
+   setTimeout(() => {
+     const saved = localStorage.getItem(STORAGE_KEY);
+     resolve(saved ? JSON.parse(saved) : [
+       { id: 1, name: 'Ana Reyes', email: 'ana@example.com', status: 'Active' },
+       { id: 2, name: 'Ben Cruz', email: 'ben@example.com', status: 'Inactive' },
+       { id: 3, name: 'Carla Santos', email: 'carla@example.com', status: 'Active' }
+     ]);
+   }, 800);
+ });
+}
+ 
+function saveRecords() {
+ localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+}
  
 /* ---------- Helpers ---------- */
  
@@ -155,3 +174,14 @@ $('pagination').addEventListener('click', (e) => {
  const page = Number(link.dataset.page);
  if (page >= 1) { currentPage = page; render(); }
 });
+
+/* ---------- Init ---------- */
+ 
+// [COMP-07] Show spinner, load data, then reveal table
+(async function init() {
+ records = await fetchRecords();
+ saveRecords();
+ $('loading').classList.add('d-none');
+ $('tableWrap').classList.remove('d-none');
+ render();
+})();
