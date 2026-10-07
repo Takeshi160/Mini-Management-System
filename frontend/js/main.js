@@ -65,6 +65,20 @@ function render() {
  renderPagination(totalPages);
 }
 
+// [COMP-06] Pagination
+function renderPagination(totalPages) {
+ if (totalPages <= 1) { $('pagination').innerHTML = ''; return; }
+ let html = `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+   <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a></li>`;
+ for (let p = 1; p <= totalPages; p++) {
+   html += `<li class="page-item ${p === currentPage ? 'active' : ''}">
+     <a class="page-link" href="#" data-page="p">{p}</a></li>`;
+ }
+ html += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+   <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a></li>`;
+ $('pagination').innerHTML = html;
+}
+
 /* ---------- Events ---------- */ 
 // [COMP-01] Add record
 $('addForm').addEventListener('submit', (e) => {
@@ -133,3 +147,11 @@ $('confirmDelete').addEventListener('click', () => {
  $(id).addEventListener('input', () => { currentPage = 1; render(); })
 );
 
+// [COMP-06] Pagination clicks
+$('pagination').addEventListener('click', (e) => {
+ const link = e.target.closest('a[data-page]');
+ if (!link) return;
+ e.preventDefault();
+ const page = Number(link.dataset.page);
+ if (page >= 1) { currentPage = page; render(); }
+});
