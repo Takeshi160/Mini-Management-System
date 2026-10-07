@@ -31,11 +31,39 @@
   </nav>
 
   <main class="container py-5">
-    <h1>Records</h1>
-    <p>Records table will be added by the Components team.</p>
-  </main>
+    <h1>Records</h1><div class="row g-3">
+
+    <!-- [COMP-01] Add Record form -->
+    <div class="col-12 col-md-6 col-lg-10">
+      <div class="card summary-card shadow-sm">
+        <div class="card-body">
+    <h2 class="text-muted">Add Records</h2>
+    <form id="addForm" class="row g-2" novalidate>
+          <div class="col-12 col-md-4">
+            <input type="text" id="addName" class="form-control" placeholder="Name" required>
+            <div class="invalid-feedback">Enter a name.</div>
+          </div>
+          <div class="col-12 col-md-4">
+            <input type="email" id="addEmail" class="form-control" placeholder="Email" required>
+            <div class="invalid-feedback">Enter a valid email.</div>
+          </div>
+          <div class="col-8 col-md-2">
+            <select id="addStatus" class="form-select">
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+          </div>
+          <div class="col-4 col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Add record</button>
+          </div>
+        </form>
+      </div>
+    </div>
+       
+    
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
+
