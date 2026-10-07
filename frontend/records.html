@@ -59,6 +59,20 @@
         </form>
       </div>
     </div>
+
+    <!-- [COMP-03] Search + [COMP-06] status filter -->
+    <div class="row g-2 mb-3">
+      <div class="col-12 col-md-8">
+        <input type="search" id="searchInput" class="form-control" placeholder="Search by name or email">
+      </div>
+      <div class="col-12 col-md-4">
+        <select id="filterStatus" class="form-select" aria-label="Filter by status">
+          <option value="">All statuses</option>
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+      </div>
+    </div>
   
     <!-- [COMP-02] View Records table -->
     <div id="tableWrap" class="table-responsive d-none">
