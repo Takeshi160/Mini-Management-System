@@ -107,3 +107,29 @@ $('recordsBody').addEventListener('click', (e) => {
  }
 });
 
+// [COMP-04] Save edit
+$('editForm').addEventListener('submit', (e) => {
+ e.preventDefault();
+ if (!validate(e.target)) return;
+ const record = records.find((r) => r.id === Number($('editId').value));
+ record.name = $('editName').value.trim();
+ record.email = $('editEmail').value.trim();
+ record.status = $('editStatus').value;
+ saveRecords();
+ editModal.hide();
+ render();
+});
+ 
+// [COMP-05] Confirm delete
+$('confirmDelete').addEventListener('click', () => {
+ records = records.filter((r) => r.id !== deleteId);
+ saveRecords();
+ deleteModal.hide();
+ render();
+});
+ 
+// [COMP-03] Search and filter reset to page 1
+['searchInput', 'filterStatus'].forEach((id) =>
+ $(id).addEventListener('input', () => { currentPage = 1; render(); })
+);
+
